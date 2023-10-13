@@ -11,41 +11,42 @@
 
 namespace MINIAODANA
 {
-  class MiniAODPFele
+  class MiniAODLPele
   {
   public:
     enum {TEST=0};
-    MiniAODPFele();
-    ~MiniAODPFele();
+    MiniAODLPele();
+    ~MiniAODLPele();
     void SetEvt(const edm::Event& iEvent);
-    void SetPFEle(const edm::Handle<std::vector<pat::Electron> > electrons);
-		
+		void SetLPEle(const edm::Handle<std::vector<pat::Electron> > electrons);
+	
 		unsigned int evtEvent;
     unsigned int evtRun;
     unsigned int evtLumiBlock;
-    
-		// PF electron
-    unsigned short int nPFEle;
-    std::vector<float> ptPFEle;
-    std::vector<float> etaPFEle;
-    std::vector<float> phiPFEle;
-    std::vector<float> energyPFEle;
-    std::vector<int> chargePFEle;
-    std::vector<bool> isMvaIDwp80PFEle;
-    std::vector<bool> isMvaIDwp90PFEle;
-	  std::vector<bool> isMvaIDwpLoosePFEle;
+		
+		// Low pt electron
+		unsigned short int nLPEle;
+    std::vector<float> ptLPEle;
+    std::vector<float> etaLPEle;
+    std::vector<float> phiLPEle;
+    std::vector<float> energyLPEle;
+    std::vector<int> chargeLPEle;
+    std::vector<float> lpMvaIdIDLPEle;
+    std::vector<float> lpMvaIdptbiasedLPEle;
+	  std::vector<float> lpMvaIdunbiasedLPEle;
+		
 		
 		void Reset()
 		{
-		nPFEle = 0;
-		ptPFEle.clear();
-		etaPFEle.clear();
-		phiPFEle.clear();
-		energyPFEle.clear();
-		chargePFEle.clear();
-		isMvaIDwp80PFEle.clear();
-		isMvaIDwp90PFEle.clear();
-		isMvaIDwpLoosePFEle.clear();
+		nLPEle = 0;
+		ptLPEle.clear();
+		etaLPEle.clear();
+		phiLPEle.clear();
+		energyLPEle.clear();
+		chargeLPEle.clear();
+		lpMvaIdIDLPEle.clear();
+		lpMvaIdptbiasedLPEle.clear();
+		lpMvaIdunbiasedLPEle.clear();
 		}
 		
   };

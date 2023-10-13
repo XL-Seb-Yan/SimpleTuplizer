@@ -8,7 +8,7 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 10000
 # Input source
 # process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(1000))
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring("file:/eos/home-x/xuyan/RKProj/lowpt/2022_data.root")
+    fileNames = cms.untracked.vstring("file:RunF.root")
 )
 
 
@@ -19,8 +19,12 @@ process.source = cms.Source("PoolSource",
 # process.source.lumisToProcess.extend(myLumis) 
 
 # producer under test
-process.Tree = cms.EDAnalyzer("MiniAODPFeleTuplizer",
+process.PFTree = cms.EDAnalyzer("MiniAODPFeleTuplizer",
     electrons = cms.InputTag("slimmedElectrons"),
+)
+
+process.LPTree = cms.EDAnalyzer("MiniAODLPeleTuplizer",
+    electrons = cms.InputTag("slimmedLowPtElectrons"),
 )
 
 # output file
@@ -28,4 +32,4 @@ process.TFileService = cms.Service("TFileService",
     fileName = cms.string('SimpleNtuple.root')
 )
 
-process.p = cms.Path(process.Tree)
+process.p = cms.Path(process.PFTree*process.LPTree)

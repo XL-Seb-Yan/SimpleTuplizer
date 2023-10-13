@@ -24,12 +24,12 @@
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "TTree.h"
 
-#include "SimpleTuplizer/PFLPEleTuplizer/interface/MiniAODPFele.h"
+#include "SimpleTuplizer/PFLPEleTuplizer/interface/MiniAODLPele.h"
 
-class MiniAODPFeleTuplizer : public edm::EDAnalyzer {
+class MiniAODLPeleTuplizer : public edm::EDAnalyzer {
   public:
-    explicit MiniAODPFeleTuplizer (const edm::ParameterSet&);
-    ~MiniAODPFeleTuplizer() {}
+    explicit MiniAODLPeleTuplizer (const edm::ParameterSet&);
+    ~MiniAODLPeleTuplizer() {}
 
   private:
     void beginJob(void) override ;
@@ -37,7 +37,7 @@ class MiniAODPFeleTuplizer : public edm::EDAnalyzer {
     void endJob() override;
       
   public:
-    MINIAODANA::MiniAODPFele* pfEle;
+    MINIAODANA::MiniAODLPele* lpEle;
     
   private:
     // output file
@@ -49,37 +49,37 @@ class MiniAODPFeleTuplizer : public edm::EDAnalyzer {
 	edm::EDGetTokenT<std::vector<pat::Electron> > electronToken_;
 };
 
-MiniAODPFeleTuplizer::MiniAODPFeleTuplizer(const edm::ParameterSet& iConfig):
+MiniAODLPeleTuplizer::MiniAODLPeleTuplizer(const edm::ParameterSet& iConfig):
    electronToken_(consumes<std::vector<pat::Electron>>(iConfig.getParameter<edm::InputTag>("electrons")))
     
 {
-  pfEle = new MINIAODANA::MiniAODPFele();
+  lpEle = new MINIAODANA::MiniAODLPele();
   
 	// set up output
-	tree_=fs_->make<TTree>("PfEleTree", "PfEleTree");
-	tree_->Branch("nPFEle", &(pfEle->nPFEle));
-	tree_->Branch("ptPFEle", &(pfEle->ptPFEle));
-	tree_->Branch("etaPFEle", &(pfEle->etaPFEle));
-	tree_->Branch("phiPFEle", &(pfEle->phiPFEle));
-	tree_->Branch("energyPFEle", &(pfEle->energyPFEle));
-	tree_->Branch("chargePFEle", &(pfEle->chargePFEle));
-	tree_->Branch("isMvaIDwp80PFEle", &(pfEle->isMvaIDwp80PFEle));
-	tree_->Branch("isMvaIDwp90PFEle", &(pfEle->isMvaIDwp90PFEle));
-	tree_->Branch("isMvaIDwpLoosePFEle", &(pfEle->isMvaIDwpLoosePFEle));
+	tree_=fs_->make<TTree>("LpEleTree", "LpEleTree");
+	tree_->Branch("nLPEle", &(lpEle->nLPEle));
+	tree_->Branch("ptLPEle", &(lpEle->ptLPEle));
+	tree_->Branch("etaLPEle", &(lpEle->etaLPEle));
+	tree_->Branch("phiLPEle", &(lpEle->phiLPEle));
+	tree_->Branch("energyLPEle", &(lpEle->energyLPEle));
+	tree_->Branch("chargeLPEle", &(lpEle->chargeLPEle));
+	tree_->Branch("lpMvaIdIDLPEle", &(lpEle->lpMvaIdIDLPEle));
+	tree_->Branch("lpMvaIdptbiasedLPEle", &(lpEle->lpMvaIdptbiasedLPEle));
+	tree_->Branch("lpMvaIdunbiasedLPEle", &(lpEle->lpMvaIdunbiasedLPEle));
 }
 
 
-void MiniAODPFeleTuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+void MiniAODLPeleTuplizer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  pfEle->Reset();
+  lpEle->Reset();
 
   edm::Handle<std::vector<pat::Electron> > electrons;
   iEvent.getByToken(electronToken_, electrons);
   
-  pfEle->SetEvt(iEvent);
+  lpEle->SetEvt(iEvent);
 
   if (electrons.isValid()){ 
-    pfEle->SetPFEle(electrons);
+    lpEle->SetLPEle(electrons);
   } else {
     edm::LogWarning("MissingProduct") << "Electrons not found. Branch will not be filled" << std::endl;
   }
@@ -90,15 +90,15 @@ void MiniAODPFeleTuplizer::analyze(const edm::Event& iEvent, const edm::EventSet
 
 // ------------ method called once each job just before starting event loop  ------------
 void 
-MiniAODPFeleTuplizer::beginJob(void)
+MiniAODLPeleTuplizer::beginJob(void)
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void 
-MiniAODPFeleTuplizer::endJob() {
+MiniAODLPeleTuplizer::endJob() {
 }
 
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(MiniAODPFeleTuplizer);
+DEFINE_FWK_MODULE(MiniAODLPeleTuplizer);

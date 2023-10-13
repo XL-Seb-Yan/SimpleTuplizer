@@ -10,27 +10,26 @@ MINIAODANA::MiniAODPFele::~MiniAODPFele()
 
 void MINIAODANA::MiniAODPFele::SetEvt(const edm::Event& iEvent)
 {
-    pfEle_.evtEvent = iEvent.id().event();
-    pfEle_.evtRun = iEvent.id().run();
-    pfEle_.evtLumiBlock = iEvent.id().luminosityBlock();
+    evtEvent = iEvent.id().event();
+    evtRun = iEvent.id().run();
+    evtLumiBlock = iEvent.id().luminosityBlock();
     
 }
 
-void MINIAODANA::MiniAODPFele::SetEle(const edm::Handle<std::vector<pat::Electron> > electrons)
+void MINIAODANA::MiniAODPFele::SetPFEle(const edm::Handle<std::vector<pat::Electron> > electrons)
 {
-  int nEles = 0;
+  int nPFEles = 0;
   for (const pat::Electron &el : *electrons) {
-    nEles++;
-    if (el.pt() < 2) continue;
-    pfEle_.ptEle.push_back(el.pt());
-    pfEle_.etaEle.push_back(el.eta());
-    pfEle_.phiEle.push_back(el.phi());
-    pfEle_.energyEle.push_back(el.energy());
-    pfEle_.chargeEle.push_back(el.charge());
-    pfEle_.isMvaIDwp80Ele.push_back(el.electronID("mvaEleID-Fall17-iso-V2-wp80"));
-    pfEle_.isMvaIDwp90Ele.push_back(el.electronID("mvaEleID-Fall17-iso-V2-wp90"));
+    nPFEles++;
+    if (el.pt() < 0.5) continue;
+    ptPFEle.push_back(el.pt());
+    etaPFEle.push_back(el.eta());
+    phiPFEle.push_back(el.phi());
+    energyPFEle.push_back(el.energy());
+    chargePFEle.push_back(el.charge());
+    isMvaIDwp80PFEle.push_back(el.electronID("mvaEleID-Fall17-iso-V2-wp80"));
+    isMvaIDwp90PFEle.push_back(el.electronID("mvaEleID-Fall17-iso-V2-wp90"));
+		isMvaIDwpLoosePFEle.push_back(el.electronID("mvaEleID-Fall17-iso-V2-wpLoose"));
     }
-	int j=0;
-	
-  pfEle_.nEle = nEles;
+  nPFEle = nPFEles;
 }
