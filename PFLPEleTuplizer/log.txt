@@ -1,0 +1,8 @@
+13-Oct-2023 07:14:57 CEST  Initiating request to open file root://eoscms.cern.ch//eos/cms/store/data/Run2022F/ParkingDoubleElectronLowMass0/MINIAOD/PromptReco-v1/000/360/390/00000/742343d0-e179-4e4f-85b6-73bdf0123587.root
+%MSG-w XrdAdaptorInternal:  file_open 13-Oct-2023 07:14:58 CEST pre-events
+Failed to open file at URL root://eoscms.cern.ch:1094//eos/cms/store/data/Run2022F/ParkingDoubleElectronLowMass0/MINIAOD/PromptReco-v1/000/360/390/00000/742343d0-e179-4e4f-85b6-73bdf0123587.root?xrdcl.requuid=65dc00ef-43e4-426a-b64a-7925853d9a11.
+%MSG
+%MSG-w XrdAdaptorInternal:  file_open 13-Oct-2023 07:14:58 CEST pre-events
+Failed to open file at URL root://eoscms.cern.ch:1094//eos/cms/store/data/Run2022F/ParkingDoubleElectronLowMass0/MINIAOD/PromptReco-v1/000/360/390/00000/742343d0-e179-4e4f-85b6-73bdf0123587.root?tried=&xrdcl.requuid=ee7bd2ef-05ac-4e69-a78c-4d7f14dfbf60.
+%MSG
+13-Oct-2023 07:14:58 CEST  Initiating request to open file root://xrootd-cms.infn.it//store/data/Run2022F/ParkingDoubleElectronLowMass0/MINIAOD/PromptReco-v1/000/360/390/00000/742343d0-e179-4e4f-85b6-73bdf0123587.root

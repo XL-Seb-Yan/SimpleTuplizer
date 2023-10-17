@@ -8,7 +8,7 @@ jobName = "Test1"
 jobCfg = "run-Data.py"
 jobScript = "cmsRun.sh"
 rel = "CMSSW_12_4_8"
-eosDir = "/eos/home-x/xuyan/RKProj/lowpt" + jobName + "_" + str(ts) + "/"
+eosDir = "/eos/home-x/xuyan/RKProj/lowpt/" + jobName + "_" + str(ts) + "/"
 
 rootDir = os.environ["CMSSW_BASE"] + "/src/SimpleTuplizer/PFLPEleTuplizer/"
 jobDir = rootDir + jobName + "_" + str(ts) + "/"
@@ -18,12 +18,13 @@ files_batch = 20
 fileList = rootDir + "ParkingDoubleElectronLowMass0-Run2022F-PromptReco-v1.list" 
 
 while ret == 0:
+   ret = os.system("rm filelist_tmp_*.list")
+   ret = os.system("rm filelist.tgz")
    ret = os.system("mkdir -p " + jobDir)
    ret = os.system("mkdir -p " + eosDir)
    ret = os.system("mkdir -p " + jobDir + "out/")
    ret = os.system("mkdir -p " + jobDir + "err/")
    ret = os.system("mkdir -p " + jobDir + "log/")
-   ret = os.system("rm filelist.tgz")
    ret = os.chdir(os.environ["CMSSW_BASE"]+"/../")
    print('Tarballing ' + rel + "/ into " + jobName + ".tgz...")
    ret = os.system("tar --exclude='*.root' --exclude='ignore' --exclude='.git' " + "-zcf " + jobName + ".tgz " + rel)

@@ -85,6 +85,7 @@ void MiniAODPFeleTuplizer::analyze(const edm::Event& iEvent, const edm::EventSet
   }
   
   tree_->Fill();
+	int i=0;
 
 }
 

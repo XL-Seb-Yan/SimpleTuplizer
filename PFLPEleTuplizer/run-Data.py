@@ -1,6 +1,10 @@
 import FWCore.ParameterSet.Config as cms
+from FWCore.ParameterSet.VarParsing import VarParsing
 
-process = cms.Process("L1NTUPLE")
+options = VarParsing('analysis')
+options.parseArguments()
+
+process = cms.Process("NTUPLE")
 
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 10000
@@ -8,7 +12,7 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 10000
 # Input source
 # process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(1000))
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring("file:RunF.root")
+    fileNames = cms.untracked.vstring(options.inputFiles)
 )
 
 

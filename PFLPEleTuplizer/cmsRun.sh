@@ -26,7 +26,7 @@ ls ./
 touch log.txt
 cmsRun ${5} inputFiles_load=${6} 2>&1 | tee log.txt
 cp log.txt ${1}/log_${4}.txt
-cp ${7}.root ${1}/${7}_${4}.root
-rm ${7}.root
+cp SimpleNtuple.root ${1}/SimpleNtuple_${4}.root
+rm SimpleNtuple.root
 cd ${_CONDOR_SCRATCH_DIR}
 rm -rf ${3}
